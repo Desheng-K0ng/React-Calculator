@@ -147,8 +147,8 @@ const App = () => {
         </div>
         {/* Calculator buttons */}
         <button
-          onClick={() => dispatch({ type: ACTIONS.CLEAR })}
           className="grey-btn"
+          onClick={() => dispatch({ type: ACTIONS.CLEAR })}
         >
           AC
         </button>

@@ -20,6 +20,7 @@ body {
   background-color: black;
   gap: 1rem;
   padding: 1rem 1rem;
+  border-radius: 20px;
 }
 
 .calculator-grid > button {
@@ -50,8 +51,8 @@ body {
   word-break: break-all;
 }
 
-button.gery-btn {
-  background-color: rgb(170, 169, 169);
+button.grey-btn {
+  background-color: rgb(173, 172, 172);
   color: black;
 }
 
@@ -60,5 +61,5 @@ button.light-yellow {
 }
 
 button:hover {
-  background-color: gray;
+  background-color: rgb(114, 110, 110);
 }
