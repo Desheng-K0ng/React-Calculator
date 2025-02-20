@@ -1,65 +1,128 @@
+/* 
+  全局样式 (Global Styles) 
+  1. 统一字体 (Ensure consistent font style)
+  2. 修正 box-sizing 避免 padding 影响尺寸 (Fix box-sizing issue to avoid padding affecting element size)
+*/
 * {
-  font-family: Arial, Helvetica, sans-serif;
-}
-*::before,
-*::after {
-  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif; /* 统一字体 (Use a standard font) */
+  box-sizing: border-box; /* 让 padding 和 border 不影响元素尺寸 (Ensure padding and border do not affect size) */
 }
 
 body {
-  margin: 0;
-  background-color: orange;
+  margin: 0; /* 移除默认外边距 (Remove default margin) */
+  background-color: orange; /* 设置背景颜色 (Set background color) */
+  display: flex; /* 使用 Flexbox 让计算器居中 (Use Flexbox for centering calculator) */
+  justify-content: center; /* 水平居中 (Horizontally center the calculator) */
+  align-items: center; /* 垂直居中 (Vertically center the calculator) */
+  height: 100vh; /* 让整个页面占满视口高度 (Make the page take up the full viewport height) */
 }
 
+/* 
+  计算器整体布局 (Calculator Grid Layout) 
+  1. 使用 CSS Grid 实现按钮排布 (Use CSS Grid for layout)
+  2. 让计算器在不同屏幕下都能自适应 (Ensure responsiveness across different screen sizes)
+*/
 .calculator-grid {
   display: grid;
-  justify-self: center;
-  margin-top: 6rem;
-  grid-template-columns: repeat(4, 6rem);
-  grid-template-rows: minmax(7rem, auto) repeat(5, 6rem);
-  background-color: black;
-  gap: 1rem;
-  padding: 1rem 1rem;
-  border-radius: 20px;
+  margin-top: 2rem; /* 顶部留出一些空间 (Add top margin for spacing) */
+
+  /* 
+    让按钮宽度可调 (Make button width adjustable)
+    - 4 列 (4 columns)
+    - 最小 50px，最大自动填充 (Min 50px, max auto-fill)
+  */
+  grid-template-columns: repeat(4, minmax(50px, 1fr));
+
+  /* 
+    第一行 (显示区域) 高度较大 (First row for display is larger)
+    下面 5 行用于按钮 (Next 5 rows for buttons)
+  */
+  grid-template-rows: minmax(90px, auto) repeat(5, minmax(60px, auto));
+
+  background-color: black; /* 计算器背景色 (Calculator background color) */
+  gap: 0.8rem; /* 按钮之间的间距 (Spacing between buttons) */
+  padding: 1.5rem; /* 计算器整体内边距 (Padding around calculator) */
+  border-radius: 20px; /* 圆角边框 (Rounded borders) */
+  width: 100%; /* 让计算器宽度自适应 (Make calculator width responsive) */
+  max-width: 400px; /* 限制计算器最大宽度 (Limit max width to prevent excessive stretching) */
 }
 
+/* 
+  按钮样式 (Button Styles) 
+  1. 设置默认外观 (Set default button appearance)
+  2. 增加交互效果 (Improve interaction with hover effects)
+*/
 .calculator-grid > button {
-  cursor: pointer;
-  font-size: 2rem;
-  border-radius: 99999px;
-  border: none;
-  background-color: rgb(43, 42, 42);
-  color: white;
+  cursor: pointer; /* 鼠标悬停时显示手型 (Show pointer cursor on hover) */
+  font-size: 2rem; /* 按钮文字大小 (Button font size) */
+  border-radius: 50px; /* 按钮变成圆角 (Make buttons rounded) */
+  border: none; /* 去掉默认边框 (Remove default border) */
+  background-color: rgb(
+    43,
+    42,
+    42
+  ); /* 默认深色背景 (Dark background by default) */
+  color: white; /* 文字颜色 (Text color) */
+  padding: 15px; /* 按钮内边距 (Button padding) */
+  transition: background-color 0.2s; /* 过渡动画，增加悬停效果 (Smooth color transition on hover) */
 }
 
-.span-two {
-  grid-column: span 2;
-  text-align: left;
-  padding-left: 40px;
+/* 按钮悬停效果 (Hover effect for buttons) */
+button:hover {
+  background-color: rgb(90, 90, 90);
 }
 
+/* 
+  显示区域 (Display Section) 
+  1. 显示计算结果 (Show calculation results)
+  2. 让文字靠右对齐 (Align text to the right)
+*/
 .output {
-  grid-column: 1/-1; /* Span all columns */
-  background-color: black;
-  color: white;
-  display: flex; /* */
-  font-size: 3rem;
-  align-items: flex-end;
-  flex-direction: column;
-  justify-content: space-around;
-  word-wrap: break-word;
-  word-break: break-all;
+  grid-column: 1/-1; /* 让它跨越整个 4 列 (Span across all 4 columns) */
+  background-color: black; /* 背景色 (Background color) */
+  color: white; /* 文字颜色 (Text color) */
+  display: flex; /* 使用 Flexbox 排列内容 (Use Flexbox for layout) */
+  font-size: 2.5rem; /* 文字大小 (Font size) */
+  align-items: flex-end; /* 让数字靠底部对齐 (Align numbers to the bottom) */
+  flex-direction: column; /* 让新输入的数字在下方显示 (New input appears at the bottom) */
+  justify-content: space-around; /* 让上下间距合理 (Ensure even spacing) */
+  word-wrap: break-word; /* 让长数字换行 (Allow long numbers to wrap) */
+  word-break: break-all; /* 避免溢出 (Prevent overflow) */
+  padding: 10px; /* 添加内边距 (Add padding) */
+  min-height: 90px; /* 让显示区域至少有 90px 高度 (Ensure minimum height for display) */
 }
 
+/* 灰色按钮（AC、±、%）(Grey Buttons: AC, ±, %) */
 button.grey-btn {
   background-color: rgb(173, 172, 172);
   color: black;
 }
 
+/* 橙色按钮（运算符 + - * / =）(Orange Buttons: Operators +, -, *, /, =) */
 button.light-yellow {
   background-color: rgb(202, 121, 15);
 }
 
-button:hover {
-  background-color: rgb(114, 110, 110);
+/* 让 "0" 按钮占据两列 (Make "0" button span two columns) */
+.span-two {
+  grid-column: span 2; /* 让按钮占据 2 列 (Span across 2 columns) */
+  text-align: left; /* 让文本靠左 (Align text to the left) */
+  padding-left: 20px; /* 左侧留一点间距 (Add some left padding) */
+}
+
+/* —— 适配小屏幕（500px 以下）(Responsive Design for Small Screens, max 500px) —— */
+@media (max-width: 500px) {
+  .calculator-grid {
+    gap: 0.5rem; /* 减小按钮之间的间距 (Reduce spacing between buttons) */
+    padding: 1rem; /* 缩小计算器内边距 (Reduce calculator padding) */
+  }
+
+  .calculator-grid > button {
+    font-size: 1.5rem; /* 按钮文字缩小 (Reduce button font size) */
+    padding: 10px; /* 减小按钮大小 (Reduce button padding) */
+  }
+
+  .output {
+    font-size: 2rem; /* 显示区域字体缩小 (Reduce display font size) */
+  }
 }
